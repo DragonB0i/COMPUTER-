@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
+import Script from 'next/script'
 // Fonts are bundled locally through Fontsource, so the site makes no third-party requests.
 import "@fontsource/michroma/latin-400.css";
 import "@fontsource-variable/inter/wght.css";
@@ -34,4 +35,12 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
       <body>{children}</body>
     </html>
   );
+}
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>{children}</body>
+      <Script src="https://scripts.simpleanalyticscdn.com/latest.js"  />
+    </html>
+  )
 }
