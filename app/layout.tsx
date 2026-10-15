@@ -10,7 +10,7 @@ import "@fontsource/jetbrains-mono/latin-700.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "COMSCI",
+  title: "ComSci",
   description:
     "Travel into the machine: from the processor to the history of computing, the anatomy of a desktop PC, its motherboard, and how a game goes from files on a drive to a running process on the CPU and GPU.",
   applicationName: "COMPUTER",
