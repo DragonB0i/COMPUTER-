@@ -1,0 +1,131 @@
+import type { BoardComponentInfo, CasePartInfo } from "@/types/hardware";
+
+/** Parts revealed as the desktop computer is taken apart, in the order they are presented. */
+export const CASE_PARTS: readonly CasePartInfo[] = [
+  {
+    id: "chassis",
+    name: "Chassis and panels",
+    side: "left",
+    summary: "The metal frame and removable side, front and top panels.",
+    role: "Holds every part in place, shields them from dust and touch, and shapes the paths air takes through the case.",
+    relation: "The motherboard bolts to its tray, the power supply sits in its own bay, and drives and cards mount in brackets.",
+  },
+  {
+    id: "case-fan",
+    name: "Case fan",
+    side: "right",
+    summary: "A fan behind the front panel that draws cool air in.",
+    role: "Keeps air moving so heat is carried out of the case instead of building up around components.",
+    relation: "Cool air passes the drives and graphics card, then leaves through the rear and top vents.",
+  },
+  {
+    id: "cpu-cooler",
+    name: "CPU cooler",
+    side: "left",
+    summary: "A finned heatsink with its own fan, mounted on the processor.",
+    role: "Pulls heat out of the CPU so it can run quickly without overheating.",
+    relation: "Presses on the processor in its socket with thermal paste between them, and plugs into a fan header on the motherboard.",
+  },
+  {
+    id: "psu",
+    name: "Power supply unit",
+    side: "right",
+    summary: "The box at the bottom that turns wall power into the voltages the parts use.",
+    role: "Converts mains AC into low-voltage DC, mainly 12, 5 and 3.3 volts, and shares it among all the components.",
+    relation: "Cables run to the motherboard’s main and CPU power connectors, to the graphics card and to the drives.",
+  },
+  {
+    id: "storage",
+    name: "Storage drives",
+    side: "left",
+    summary: "A hard disk drive with spinning platters and a 2.5-inch solid-state drive.",
+    role: "Keep the operating system, programs and files when the computer is switched off.",
+    relation: "SATA data cables join them to the motherboard and power cables to the power supply. M.2 drives plug straight into the board instead.",
+  },
+  {
+    id: "gpu",
+    name: "Graphics card",
+    side: "right",
+    summary: "An add-in board with its own processor and fast memory.",
+    role: "Renders images and video and handles highly parallel calculations, so the CPU does not have to.",
+    relation: "Plugs into a PCI Express slot on the motherboard, draws extra power from the power supply and sends video out through the rear bracket.",
+  },
+  {
+    id: "motherboard",
+    name: "Motherboard",
+    side: "left",
+    summary: "The main circuit board that every other part plugs into.",
+    role: "Links the processor, memory, storage and add-in cards with copper traces so they can exchange data and receive power.",
+    relation: "Sits on the tray inside the chassis. The processor goes in its socket, not in place of the board.",
+  },
+];
+
+/** Motherboard components in the order they are highlighted while scrolling. */
+export const BOARD_COMPONENTS: readonly BoardComponentInfo[] = [
+  {
+    id: "cpu",
+    name: "CPU socket and processor",
+    summary: "The processor sits in a socket made for its family of chips.",
+    role: "Fetches, decodes and executes the instructions of every program. A cooler clamps on top of it.",
+    relation: "Connects directly to the RAM slots, to the main PCIe slot and to the chipset.",
+  },
+  {
+    id: "ram",
+    name: "RAM slots",
+    summary: "Slots for memory modules, which hold the data programs are using right now.",
+    role: "Provides fast working memory. It is cleared when power is lost, so files must be saved to storage.",
+    relation: "Wired straight to the processor’s memory controller. Filling slots in matched pairs lets the CPU use two channels at once.",
+  },
+  {
+    id: "pcie",
+    name: "PCIe expansion slots",
+    summary: "The long slot takes a graphics card, and the shorter ones take other add-in cards.",
+    role: "Carries high-speed data in lanes between expansion cards and the CPU or chipset.",
+    relation: "The graphics card plugs in here and gets extra power from the power supply.",
+  },
+  {
+    id: "m2",
+    name: "M.2 storage slot",
+    summary: "A small slot where a gum-stick-sized solid-state drive is screwed flat to the board.",
+    role: "Gives storage a direct high-speed link without cables. Many M.2 drives use the NVMe protocol over PCIe lanes.",
+    relation: "Lanes lead to the CPU or the chipset, depending on the board.",
+    note: "Some M.2 slots support SATA drives instead, so check the board’s manual.",
+  },
+  {
+    id: "sata",
+    name: "SATA ports",
+    summary: "Small connectors for the data cables of hard disks and 2.5-inch SSDs.",
+    role: "Connect traditional storage drives, and optical drives, to the system.",
+    relation: "Controlled by the chipset. Each drive also needs a power cable from the power supply.",
+  },
+  {
+    id: "chipset",
+    name: "Chipset",
+    summary: "A support chip that expands what the processor can connect to.",
+    role: "Provides additional USB ports, SATA ports, PCIe lanes and other connections the CPU does not supply itself.",
+    relation: "Linked to the processor by a dedicated high-speed link, with the board’s ports and slots hanging off it.",
+    note: "On modern chips, many controllers have moved into the CPU, so the chipset’s role varies by platform.",
+  },
+  {
+    id: "power",
+    name: "Power connectors",
+    summary: "The wide 24-pin connector and the 8-pin connector near the processor.",
+    role: "Bring power from the power supply onto the board. The 8-pin feeds the CPU, which draws the most.",
+    relation: "Voltage regulators beside the socket turn the supply’s 12 volts into the precise voltage the processor needs.",
+  },
+  {
+    id: "io",
+    name: "Rear I/O and networking",
+    summary: "The panel of ports at the back: USB, video, audio and Ethernet.",
+    role: "Connects the computer to keyboards, displays, speakers and the network.",
+    relation: "Each port feeds a controller on the board. Ethernet uses a network controller chip and the RJ-45 jack.",
+  },
+  {
+    id: "wifi",
+    name: "Wi-Fi hardware",
+    summary: "Wireless networking, shown here as a small M.2 card with two antenna leads.",
+    role: "Sends and receives data over radio so the computer can join a wireless network.",
+    relation: "The card connects to the board’s M.2 slot, and the antennas come out at the rear.",
+    note: "Not every motherboard has Wi-Fi. It may be built in, added as a PCIe or M.2 card, or provided by a USB adapter or another device.",
+  },
+];

@@ -1,0 +1,202 @@
+/* ------------------------------------------------------------------------------------------
+   Content that sits in normal page flow: the simple (non-WebGL) view and shared buttons.
+   ------------------------------------------------------------------------------------------ */
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--signal);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.4rem;
+  padding: 0.4rem 0.9rem;
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.btn:hover:not(:disabled) {
+  background: #fff;
+  color: #000;
+}
+.btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.btn--solid {
+  background: #fff;
+  color: #000;
+}
+.btn--solid:hover:not(:disabled) {
+  background: #d8d8d8;
+}
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* ------------------------------------------------------------------------------------------
+   Simple view: the whole story as a readable, accessible page without WebGL or scroll scenes.
+   ------------------------------------------------------------------------------------------ */
+
+.simple {
+  background: #000;
+}
+.simple__bar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.2rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem var(--gutter);
+  background: rgba(0, 0, 0, 0.92);
+  border-bottom: 1px solid var(--line);
+}
+.simple__bar ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 1.2rem;
+  list-style: none;
+  padding: 0;
+}
+.simple__bar a {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mute);
+  text-decoration: none;
+}
+.simple__bar a:hover {
+  color: #fff;
+}
+.simple__hero {
+  display: grid;
+  justify-items: center;
+  gap: 1.6rem;
+  padding: clamp(56px, 12vh, 130px) var(--gutter) clamp(48px, 9vh, 100px);
+  text-align: center;
+}
+.simple__chip {
+  width: min(16rem, 56vw);
+  height: auto;
+}
+.simple__chip * {
+  vector-effect: non-scaling-stroke;
+}
+.simple__title {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(1.9rem, 8vw, 6rem);
+  line-height: 1.05;
+  letter-spacing: 0.06em;
+  padding-left: 0.1em;
+  color: transparent;
+  background: linear-gradient(180deg, #fff 15%, #c9c9c9 55%, #7d7d7d 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.simple__intro {
+  max-width: 40rem;
+  color: var(--mute);
+  font-size: 1.05rem;
+}
+.simple__section {
+  padding: clamp(48px, 9vh, 100px) var(--gutter);
+  border-top: 1px solid var(--line);
+}
+.simple__inner {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.simple__h {
+  margin-top: 0.8rem;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(1.4rem, 3.4vw, 2.6rem);
+  line-height: 1.15;
+}
+.simple__lead {
+  margin-top: 1rem;
+  max-width: 42rem;
+  color: var(--mute);
+}
+.simple__list {
+  list-style: none;
+  padding: 0;
+  margin-top: 2.4rem;
+  display: grid;
+  gap: clamp(2.4rem, 6vh, 4rem);
+}
+.simple__item {
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--line);
+  max-width: 44rem;
+}
+.simple__item .ms__title {
+  font-size: clamp(1.3rem, 2.6vw, 1.8rem);
+}
+.simple__item .ms__date {
+  font-size: clamp(1.7rem, 4vw, 2.6rem);
+}
+.simple__item .ms__facts {
+  max-width: 36rem;
+}
+.simple__facts-dt {
+  font-family: var(--mono);
+}
+.simple__parts {
+  list-style: none;
+  padding: 0;
+  margin-top: 2.2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+  gap: 2rem 2.4rem;
+}
+.simple__parts li {
+  padding-left: 1rem;
+  border-left: 1px solid var(--line-strong);
+}
+.simple__parts h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.simple__parts p {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--mute);
+}
+.simple__parts .part__lead {
+  color: #fff;
+}
+.simple__parts .part__label {
+  display: block;
+  margin-top: 0.7rem;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--signal);
+}
+.simple__parts .part__note {
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--line);
+  color: #e2e2e2;
+}

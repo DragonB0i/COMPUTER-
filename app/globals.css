@@ -1,0 +1,112 @@
+@import "tailwindcss";
+@import "./stage.css";
+@import "./lesson.css";
+@import "./software.css";
+
+/* Design tokens: pure black, white line work, neutral greys and one sparing cyan. */
+@theme {
+  --font-display: "Michroma", "Inter Variable", system-ui, sans-serif;
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --color-ink: #000000;
+  --color-paper: #ffffff;
+  --color-mute: #b4b4b4;
+  --color-dim: #8a8a8a;
+  --color-signal: #8fe9ff;
+}
+
+:root {
+  --bg: #000;
+  --fg: #fff;
+  /* Secondary text. 10:1 against black. */
+  --mute: #b4b4b4;
+  /* Tertiary text for small captions. Still above 5:1. */
+  --dim: #8a8a8a;
+  --line: rgba(255, 255, 255, 0.22);
+  --line-strong: rgba(255, 255, 255, 0.55);
+  --signal: #8fe9ff;
+  --display: var(--font-display);
+  --sans: var(--font-sans);
+  --mono: var(--font-mono);
+  --gutter: clamp(20px, 5vw, 96px);
+}
+
+html {
+  background: #000;
+  color-scheme: dark;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: auto;
+}
+
+body {
+  margin: 0;
+  background: #000;
+  color: var(--fg);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* `clip` prevents horizontal overflow without turning the body into a scroll container,
+     which would break ScrollTrigger's pinning. */
+  overflow-x: clip;
+}
+
+::selection {
+  background: #fff;
+  color: #000;
+}
+
+:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+dl,
+dd,
+ol,
+ul {
+  margin: 0;
+}
+
+/* Keyboard users can jump past the pinned scene. */
+.skip-link {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
+  padding: 0.6rem 0.9rem;
+  background: #fff;
+  color: #000;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transform: translateY(-200%);
+}
+.skip-link:focus {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

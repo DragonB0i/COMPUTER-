@@ -1,0 +1,514 @@
+/* ------------------------------------------------------------------------------------------
+   The software chapter: the warm light world the stage turns into when the computer powers on,
+   the frosted annotation panels, the tags on the objects, and the closing section.
+   ------------------------------------------------------------------------------------------ */
+
+:root {
+  --paper: #f4ecda;
+  --paper-hi: #faf5e8;
+  --paper-lo: #ece1c9;
+  --ink: #1b1a18;
+  --ink-soft: #4d4941;
+  --ink-mute: #6b655a;
+  --hair: rgba(27, 26, 24, 0.18);
+  --hair-strong: rgba(27, 26, 24, 0.55);
+  --mint: #c7e5d3;
+  --peach: #f4d4c0;
+  --lilac: #ddd3ee;
+  --sky: #cfe3f0;
+}
+
+/* ---- Layers added to the stage ---------------------------------------------------------------- */
+
+/* The warm background. It is revealed by a growing circle that starts at the power button. */
+.stage__paper {
+  --rx: 50%;
+  --ry: 50%;
+  --rr: -200px;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(ellipse 90% 80% at 50% 38%, var(--paper-hi) 0%, var(--paper) 58%, var(--paper-lo) 100%);
+  -webkit-mask-image: radial-gradient(circle at var(--rx) var(--ry), #000 0, #000 var(--rr), transparent calc(var(--rr) + 140px));
+  mask-image: radial-gradient(circle at var(--rx) var(--ry), #000 0, #000 var(--rr), transparent calc(var(--rr) + 140px));
+}
+
+.stage__swarm {
+  inset: 0;
+  z-index: 4;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.stage__vignette {
+  transition: none;
+}
+
+/* ---- Connector lines -------------------------------------------------------------------------- */
+
+.stage__leaders--sw line {
+  stroke: var(--ink);
+  stroke-width: 1.25;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  stroke-linecap: round;
+}
+.stage__leaders--sw circle {
+  fill: var(--ink);
+}
+
+/* ---- Frosted panels ----------------------------------------------------------------------------- */
+
+.sw-panels {
+  inset: 0;
+  z-index: 7;
+  pointer-events: none;
+  display: grid;
+  place-items: center end;
+  padding: clamp(56px, 9vh, 96px) clamp(16px, 4.5vw, 84px) clamp(24px, 5vh, 56px);
+}
+
+.sw-panel {
+  grid-area: 1 / 1;
+  width: min(25rem, 31vw);
+  max-width: 100%;
+  padding: 1.25rem 1.4rem 1.35rem;
+  border: 1px solid rgba(27, 26, 24, 0.18);
+  border-radius: 20px;
+  background: rgba(252, 248, 238, 0.66);
+  -webkit-backdrop-filter: blur(16px) saturate(1.15);
+  backdrop-filter: blur(16px) saturate(1.15);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.7) inset,
+    0 18px 40px -22px rgba(60, 48, 24, 0.45);
+  color: var(--ink);
+  visibility: hidden;
+}
+.sw-panel__kicker {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.sw-panel__title {
+  margin-top: 0.45rem;
+  font-family: var(--sans);
+  font-size: clamp(1.05rem, 1.35vw, 1.3rem);
+  font-weight: 650;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.sw-panel__text {
+  margin-top: 0.7rem;
+  font-size: clamp(0.84rem, 0.98vw, 0.95rem);
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+.sw-panel__note {
+  margin-top: 0.8rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--hair);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--ink-mute);
+}
+
+/* ---- Tags on the objects ------------------------------------------------------------------------- */
+
+.sw-tags {
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  overflow: hidden;
+}
+.sw-tag {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  will-change: transform;
+}
+.sw-tag__t {
+  position: absolute;
+  white-space: nowrap;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid var(--hair-strong);
+  background: rgba(252, 248, 238, 0.9);
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.sw-tag__short {
+  display: none;
+}
+.sw-tag[data-tone="primary"] .sw-tag__t {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper-hi);
+}
+.sw-tag[data-side="up"] .sw-tag__t {
+  transform: translate(-50%, calc(-100% - 8px));
+}
+.sw-tag[data-side="down"] .sw-tag__t {
+  transform: translate(-50%, 8px);
+}
+.sw-tag[data-side="left"] .sw-tag__t {
+  transform: translate(calc(-100% - 8px), -50%);
+}
+.sw-tag[data-side="right"] .sw-tag__t {
+  transform: translate(8px, -50%);
+}
+.sw-tag[data-side="center"] .sw-tag__t {
+  transform: translate(-50%, -50%);
+}
+
+/* ---- The HUD in the light world ------------------------------------------------------------------- */
+
+.stage[data-theme="light"] .hud-nav {
+  background: linear-gradient(180deg, rgba(244, 236, 218, 0.92), transparent);
+}
+.stage .hud-nav button,
+.stage .rail__label,
+.stage .icon-btn {
+  transition:
+    color 0.5s,
+    background 0.5s,
+    border-color 0.5s;
+}
+.stage[data-theme="light"] .hud-nav button {
+  color: var(--ink-mute);
+}
+.stage[data-theme="light"] .hud-nav button:hover,
+.stage[data-theme="light"] .hud-nav button[aria-current="step"] {
+  color: var(--ink);
+}
+.stage[data-theme="light"] .hud-nav button[aria-current="step"] {
+  box-shadow: inset 0 -1px 0 var(--ink);
+}
+.stage[data-theme="light"] .hud-nav .hud-nav__simple {
+  border-color: var(--hair-strong);
+  color: var(--ink-soft);
+}
+.stage[data-theme="light"] .hud-nav .hud-nav__simple:hover {
+  border-color: var(--ink);
+}
+.stage[data-theme="light"] .icon-btn {
+  background: rgba(252, 248, 238, 0.7);
+  border-color: var(--hair-strong);
+  color: var(--ink);
+}
+.stage[data-theme="light"] .icon-btn:hover {
+  background: var(--ink);
+  color: var(--paper-hi);
+}
+.stage[data-theme="light"] .rail__track {
+  background: var(--hair);
+}
+.stage[data-theme="light"] .rail__fill {
+  background: var(--ink);
+}
+.stage[data-theme="light"] .rail__tick {
+  background: var(--hair-strong);
+}
+.stage[data-theme="light"] .rail__tick[data-active="true"] {
+  background: var(--ink);
+}
+.stage[data-theme="light"] .rail__label {
+  color: var(--ink-mute);
+}
+.stage[data-theme="light"] :focus-visible {
+  outline-color: var(--ink);
+}
+
+/* ---- Closing section --------------------------------------------------------------------------------- */
+
+.sw-end {
+  position: relative;
+  padding: clamp(64px, 14vh, 150px) var(--gutter) clamp(72px, 14vh, 150px);
+  background: linear-gradient(180deg, var(--paper-lo), var(--paper) 40%);
+  color: var(--ink);
+}
+.sw-end__inner {
+  max-width: 54rem;
+  margin: 0 auto;
+  display: grid;
+  gap: 1.4rem;
+  justify-items: start;
+}
+.sw-end__eyebrow {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.sw-end__title {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 3.6vw, 2.8rem);
+  line-height: 1.15;
+}
+.sw-end__lead {
+  max-width: 42rem;
+  font-size: clamp(1.05rem, 1.7vw, 1.35rem);
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+.sw-end__next {
+  width: 100%;
+  max-width: 42rem;
+  margin-top: 1rem;
+}
+.sw-end__next h3 {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.sw-end__next ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 0.6rem;
+}
+.sw-end__next li {
+  position: relative;
+  padding: 0.7rem 0 0.7rem 1.6rem;
+  border-bottom: 1px solid var(--hair);
+  color: var(--ink-soft);
+}
+.sw-end__next li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--ink);
+}
+.sw-end__top {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1.2rem;
+  padding: 0.7rem 1.1rem;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: transparent;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.sw-end__top:hover {
+  background: var(--ink);
+  color: var(--paper-hi);
+}
+.sw-end :focus-visible,
+.simple-sw :focus-visible {
+  outline-color: var(--ink);
+}
+
+/* ---- Simple view: software section --------------------------------------------------------------------- */
+
+.simple-sw {
+  padding: clamp(48px, 9vh, 100px) var(--gutter);
+  background: var(--paper);
+  color: var(--ink);
+}
+.simple-sw__eyebrow {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.simple-sw__h {
+  margin-top: 0.8rem;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(1.4rem, 3.4vw, 2.6rem);
+  line-height: 1.15;
+}
+.simple-sw__lead {
+  margin-top: 1rem;
+  max-width: 42rem;
+  color: var(--ink-soft);
+}
+.simple-sw__group {
+  margin-top: clamp(2.2rem, 6vh, 3.6rem);
+}
+.simple-sw__group-title {
+  font-size: 1.2rem;
+  font-weight: 650;
+}
+.simple-sw__group-lead {
+  margin-top: 0.3rem;
+  color: var(--ink-mute);
+}
+.simple-sw__list {
+  list-style: none;
+  padding: 0;
+  margin-top: 1.4rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+  gap: 1.4rem;
+}
+.simple-sw__list li {
+  padding: 1.1rem 1.2rem 1.2rem;
+  border: 1px solid var(--hair);
+  border-radius: 16px;
+  background: rgba(252, 248, 238, 0.7);
+}
+.simple-sw__kicker {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.simple-sw__list h4 {
+  margin-top: 0.4rem;
+  font-size: 1.05rem;
+  font-weight: 650;
+  line-height: 1.3;
+}
+.simple-sw__list p {
+  margin-top: 0.55rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+.simple-sw__list .simple-sw__kicker {
+  margin-top: 0;
+  color: var(--ink-mute);
+  font-size: 0.6rem;
+  line-height: 1.4;
+}
+.simple-sw__note {
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--hair);
+  color: var(--ink-mute) !important;
+}
+.simple-sw__picture {
+  font-size: 0.8rem !important;
+  color: var(--ink-mute) !important;
+}
+.simple-sw__picture span {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.simple-sw__end {
+  margin-top: clamp(2.6rem, 7vh, 4.4rem);
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--hair-strong);
+  max-width: 42rem;
+}
+.simple-sw__closing {
+  font-size: clamp(1.05rem, 1.7vw, 1.3rem);
+  line-height: 1.55;
+}
+.simple-sw__end h3 {
+  margin-top: 1.6rem;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.simple-sw__end ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 0.5rem;
+}
+.simple-sw__end li {
+  position: relative;
+  padding: 0.6rem 0 0.6rem 1.5rem;
+  border-bottom: 1px solid var(--hair);
+  color: var(--ink-soft);
+}
+.simple-sw__end li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--ink);
+}
+
+/* ---- Tablets and phones: the panel moves below the picture ----------------------------------------------- */
+
+@media (max-width: 1100px) and (min-width: 801px) {
+  .sw-panel {
+    width: min(21rem, 36vw);
+    padding: 1rem 1.1rem 1.1rem;
+  }
+}
+
+@media (max-width: 800px) {
+  .sw-panels {
+    place-items: end center;
+    padding: 0 14px calc(14px + env(safe-area-inset-bottom, 0px));
+  }
+  .sw-panel {
+    width: min(100%, 34rem);
+    padding: 0.85rem 1rem 0.95rem;
+    border-radius: 16px;
+  }
+  .sw-panel__kicker {
+    font-size: 0.56rem;
+  }
+  .sw-panel__title {
+    margin-top: 0.3rem;
+    font-size: 0.98rem;
+  }
+  .sw-panel__text {
+    margin-top: 0.45rem;
+    font-size: 0.8rem;
+    line-height: 1.45;
+  }
+  .sw-panel__note {
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    font-size: 0.72rem;
+    line-height: 1.4;
+  }
+  .sw-tag__t {
+    padding: 0.14rem 0.4rem;
+    font-size: 0.5rem;
+    letter-spacing: 0.08em;
+  }
+  .sw-tag[data-has-short] .sw-tag__full {
+    display: none;
+  }
+  .sw-tag[data-has-short] .sw-tag__short {
+    display: inline;
+  }
+  /* The small file and game tags are left out on phones; the thread names stay. */
+  .sw-tag[data-tone="quiet"]:not([data-has-short]) {
+    display: none;
+  }
+  .sw-tag[data-sw-tag="isa"] .sw-tag__t {
+    transform: translate(-50%, calc(-100% - 8px));
+  }
+
+  /* Step buttons: out of the scene, into a row under the chapter strip. */
+  .stage[data-theme="light"] .hud-step {
+    top: 3.5rem;
+    right: 10px;
+    flex-direction: row;
+    gap: 0.35rem;
+  }
+  .stage[data-theme="light"] .hud-step .icon-btn {
+    width: 2.1rem;
+    height: 2.1rem;
+  }
+}

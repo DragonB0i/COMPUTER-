@@ -1,0 +1,40 @@
+{
+  "name": "computer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "COMPUTER \u2014 an immersive, scroll-driven journey into computing.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "@fontsource/michroma": "^5.3.0",
+    "@react-three/drei": "^10.7.9",
+    "@react-three/fiber": "^9.8.1",
+    "gsap": "^3.15.0",
+    "lucide-react": "^1.55.0",
+    "next": "^16.4.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/three": "^0.186.0",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "^16.4.0",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.9.0"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  }
+}
